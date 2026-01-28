@@ -6,7 +6,13 @@ const { v4: uuidv4 } = require("uuid");
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+  }),
+);
 app.use(express.json()); //This allows the server to read JSON sent from the frontend
 dotEnv.config();
 
