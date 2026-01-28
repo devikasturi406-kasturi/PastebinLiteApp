@@ -10,7 +10,7 @@ const ViewText = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/pastes/${id}`)
+      .get(`https://pastebinliteapp.onrender.com/api/pastes/${id}`)
       .then((res) => {
         setText(res.data);
         if (res.data.expires_at) {

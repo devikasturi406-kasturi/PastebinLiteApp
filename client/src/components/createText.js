@@ -9,13 +9,16 @@ const CreateText = () => {
 
   const handleSaveText = async () => {
     try {
-      const res = await axios.post("http://127.0.0.1:5000/api/pastes", {
-        content: content,
-        expirationMinutes: minutes,
-        maxViews: maxViews,
-      });
+      const res = await axios.post(
+        "https://pastebinliteapp.onrender.com/api/pastes",
+        {
+          content: content,
+          expirationMinutes: minutes,
+          maxViews: maxViews,
+        },
+      );
       const urlId = res.data.id;
-      const completeUrl = `http://localhost:3000/v/${urlId}`;
+      const completeUrl = `https://pastebinliteapp.onrender.com/v/${urlId}`;
       setUniqueLink(completeUrl);
       console.log(res);
     } catch (err) {
