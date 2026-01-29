@@ -35,7 +35,7 @@ const ViewText = () => {
         clearInterval(timer);
         setTimeLeft("EXPIRED");
         setText(null);
-        setError("This paste has self-destructed.");
+        setError("This Paste has self-destructed.");
       } else {
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
@@ -62,7 +62,7 @@ const ViewText = () => {
             padding: "5px 10px",
           }}
         >
-          ⏱ Self-Destruct in: {timeLeft}
+          Expires in: {timeLeft}
         </div>
       )}
       <pre

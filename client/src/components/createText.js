@@ -18,7 +18,7 @@ const CreateText = () => {
         },
       );
       const urlId = res.data.id;
-      const completeUrl = `https://pastebin-lite-app-two.vercel.app/v/${urlId}`;
+      const completeUrl = `https://pastebin-lite-app-two.vercel.app/p/${urlId}`;
       setUniqueLink(completeUrl);
       console.log(res);
     } catch (err) {
@@ -38,12 +38,13 @@ const CreateText = () => {
       <div style={{ marginTop: "10px" }}>
         <input
           type="number"
-          placeholder="Minutes"
+          placeholder="Enter time in Minutes"
           onChange={(e) => setMinutes(e.target.value)}
         />
+        <br />
         <input
           type="number"
-          placeholder="Max Views"
+          placeholder="Enter Max Views"
           onChange={(e) => setMaxViews(e.target.value)}
         />
       </div>

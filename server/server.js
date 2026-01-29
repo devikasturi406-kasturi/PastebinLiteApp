@@ -6,7 +6,7 @@ const { v4: uuidv4 } = require("uuid");
 
 const app = express();
 
-app.use(express.json()); //This allows the server to read JSON sent from the frontend
+app.use(express.json());
 dotEnv.config();
 
 app.use(
@@ -39,38 +39,10 @@ const Paste = mongoose.model("Paste", pasteSchema);
 
 // Insert Data
 app.post("/api/pastes", async (req, res) => {
-  // console.log("Checking what arrived from Postman:", req.body);
-
-  // // If content is missing, stop here and tell Postman why
-  // if (!req.body.content) {
-  //   return res.status(400).json({
-  //     error:
-  //       "The server received your request, but the 'content' field was empty!",
-  //   });
-  // }
-  // try {
-  //   const expirationMinutes = parseInt(req.body.expirationMinutes);
-  //   const expires_at = expirationMinutes
-  //     ? new Date(Date.now() + expirationMinutes * 60000)
-  //     : null;
-
-  //   const newPaste = new Paste({
-  //     content: req.body.content,
-  //     expires_at: expires_at,
-  //     max_views: req.body.maxViews,
-  //   });
-
-  //   const savedPaste = await newPaste.save();
-  //   console.log("Success! Saved to DB:", savedPaste.customId);
-  //   res.status(201).json({ id: savedPaste.customId });
-  // } catch (error) {
-  //   console.error("THE EXACT ERROR:", error);
-  //   res.status(500).json({ error: "Failed to save paste" });
-  // }
   try {
     const { content, expirationMinutes, maxViews } = req.body;
 
-    // Logic to calculate expiry - Ensure expirationMinutes exists!
+    // Logic to calculate expiry
     let expires_at = null;
     if (expirationMinutes) {
       expires_at = new Date(Date.now() + parseInt(expirationMinutes) * 60000);
@@ -80,13 +52,13 @@ app.post("/api/pastes", async (req, res) => {
       content,
       customId: uuidv4(),
       expires_at: expires_at,
-      max_views: maxViews ? parseInt(maxViews) : null, // Ensure it's a number or null
+      max_views: maxViews ? parseInt(maxViews) : null,
     });
 
     await newPaste.save();
     res.status(201).json({ id: newPaste.customId });
   } catch (err) {
-    console.error("SERVER ERROR:", err); // This shows up in Render Logs
+    console.error("SERVER ERROR:", err);
     res.status(500).json({ error: "Failed to save paste" });
   }
 });
@@ -109,7 +81,6 @@ app.get("/api/pastes/:id", async (req, res) => {
     }
 
     // CHECK VIEW LIMIT
-    // Only check if max_views was actually set
     if (paste.max_views && paste.view_count >= paste.max_views) {
       return res
         .status(410)

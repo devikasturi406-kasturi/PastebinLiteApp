@@ -6,7 +6,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<CreateText />} />
-      <Route path="/v/:id" element={<ViewText />} />
+      <Route path="/p/:id" element={<ViewText />} />
     </Routes>
   );
 }
