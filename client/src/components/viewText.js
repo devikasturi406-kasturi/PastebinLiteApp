@@ -58,7 +58,6 @@ const ViewText = () => {
           style={{
             color: "red",
             fontWeight: "bold",
-            border: "1px solid red",
             padding: "5px 10px",
           }}
         >
