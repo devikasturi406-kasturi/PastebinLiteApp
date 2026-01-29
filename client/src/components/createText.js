@@ -18,7 +18,7 @@ const CreateText = () => {
         },
       );
       const urlId = res.data.id;
-      const completeUrl = `https://pastebinliteapp.vercel.app/v/${urlId}`;
+      const completeUrl = `https://pastebin-lite-app-two.vercel.app/v/${urlId}`;
       setUniqueLink(completeUrl);
       console.log(res);
     } catch (err) {
